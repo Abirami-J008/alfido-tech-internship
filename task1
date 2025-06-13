@@ -1,0 +1,60 @@
+def add(x, y):
+    """Return the sum of x and y"""
+    return x + y
+
+def subtract(x, y):
+    """Return the difference of x and y"""
+    return x - y
+
+def multiply(x, y):
+    """Return the product of x and y"""
+    return x * y
+
+def divide(x, y):
+    """Return the quotient of x and y"""
+    if y == 0:
+        raise ZeroDivisionError("Cannot divide by zero")
+    return x / y
+
+def get_number(prompt):
+    """Get a number from the user"""
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def main():
+    operations = {
+        '1': add,
+        '2': subtract,
+        '3': multiply,
+        '4': divide
+    }
+
+    while True:
+        print("Simple Calculator")
+        print("1. Addition")
+        print("2. Subtraction")
+        print("3. Multiplication")
+        print("4. Division")
+        choice = input("Enter your choice (1/2/3/4) or 'q' to quit: ")
+        
+        if choice.lower() == 'q':
+            break
+
+        if choice not in operations:
+            print("Invalid choice. Please try again.")
+            continue
+
+        num1 = get_number("Enter first number: ")
+        num2 = get_number("Enter second number: ")
+
+        try:
+            result = operations[choice](num1, num2)
+            print(f"Result: {result}")
+        except ZeroDivisionError as e:
+            print(e)
+
+if __name__ == "__main__":
+    main()
